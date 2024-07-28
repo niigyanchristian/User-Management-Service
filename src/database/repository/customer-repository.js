@@ -132,7 +132,7 @@ class CustomerRepository {
 
     }
 
-    async AddCartItem(customerId, { _id, name, price, banner,unit,shop_id}, isRemove){
+    async AddCartItem(customerId, { _id, name, price, banner,unit,shop_id},qty,isRemove){
 
         
         const profile = await CustomerModel.findById(customerId).populate('cart');
@@ -142,7 +142,7 @@ class CustomerRepository {
  
             const cartItem = {
                 product: { _id, name, price, banner,shop_id },
-                unit
+                unit:qty
             };
           
             let cartItems = profile.cart;
@@ -155,7 +155,7 @@ class CustomerRepository {
                         if(isRemove){
                             cartItems.splice(cartItems.indexOf(item), 1);
                         }else{
-                            item.unit = unit;
+                            item.unit = qty;
                         }
                         isExist = true;
                     }

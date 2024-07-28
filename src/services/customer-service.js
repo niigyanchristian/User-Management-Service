@@ -140,9 +140,9 @@ class CustomerService {
         return FormateData(wishlistResult);
     }
 
-    async ManageCart(customerId, product, isRemove){
+    async ManageCart(customerId, product,qty, isRemove){
         console.log("I'm adding to cart!")
-        const cartResult = await this.repository.AddCartItem(customerId, product, isRemove);        
+        const cartResult = await this.repository.AddCartItem(customerId, product, qty,isRemove);        
        return FormateData(cartResult);
     }
 
@@ -167,10 +167,10 @@ class CustomerService {
                 this.AddToWishlist(userId,product)
                 break;
             case 'ADD_TO_CART':
-                this.ManageCart(userId,product, false);
+                this.ManageCart(userId,product,qty, false);
                 break;
             case 'REMOVE_FROM_CART':
-                this.ManageCart(userId,product, true);
+                this.ManageCart(userId,product,qty, true);
                 break;
             case 'CREATE_ORDER':
                 this.ManageOrder(userId,order);
